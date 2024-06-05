@@ -36,7 +36,7 @@ function catalogGetPost(): array
         1 => [
             'post_id' => 1,
             'name' => 'Post1',
-            'url' => 'product-1',
+            'url' => 'post-1',
             'description' => 'Post1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jane Dou',
             'publication_date' => '2022-06-15'
@@ -44,7 +44,7 @@ function catalogGetPost(): array
         2 => [
             'post_id' => 2,
             'name' => 'Post2',
-            'url' => 'product-2',
+            'url' => 'post-2',
             'description' => 'Post2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jane Dou',
             'publication_date' => '2022-08-11'
@@ -52,7 +52,7 @@ function catalogGetPost(): array
         3 => [
             'post_id' => 3,
             'name' => 'Post3',
-            'url' => 'product-3',
+            'url' => 'post-3',
             'description' => 'Post3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jack Nobody',
             'publication_date' => '2022-08-28'
@@ -60,7 +60,7 @@ function catalogGetPost(): array
         4 => [
             'post_id' => 4,
             'name' => 'Post4',
-            'url' => 'product-4',
+            'url' => 'post-4',
             'description' => 'Post4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Silvia Smith',
             'publication_date' => '2022-11-07'
@@ -68,7 +68,7 @@ function catalogGetPost(): array
         5 => [
             'post_id' => 5,
             'name' => 'Post5',
-            'url' => 'product-5',
+            'url' => 'post-5',
             'description' => 'Post5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Silvia Smith',
             'publication_date' => '2022-12-30'
@@ -76,7 +76,7 @@ function catalogGetPost(): array
         6 => [
             'post_id' => 6,
             'name' => 'Post6',
-            'url' => 'product-6',
+            'url' => 'post-6',
             'description' => 'Post6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jack Nobody',
             'publication_date' => '2023-01-16'
@@ -85,7 +85,7 @@ function catalogGetPost(): array
         7 => [
             'post_id' => 7,
             'name' => 'Post7',
-            'url' => 'product-7',
+            'url' => 'post-7',
             'description' => 'Post7 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jane Dou',
             'publication_date' => '2023-02-15'
@@ -94,7 +94,7 @@ function catalogGetPost(): array
         8 => [
             'post_id' => 8,
             'name' => 'Post8',
-            'url' => 'product-8',
+            'url' => 'post-8',
             'description' => 'Post8 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Jack Nobody',
             'publication_date' => '2023-02-28'
@@ -103,7 +103,7 @@ function catalogGetPost(): array
         9 => [
             'post_id' => 9,
             'name' => 'Post9',
-            'url' => 'product-9',
+            'url' => 'post-9',
             'description' => 'Post9 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.',
             'author_name' => 'Iurii Stepanenko',
             'publication_date' => '2023-03-10'
