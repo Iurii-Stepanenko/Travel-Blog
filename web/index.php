@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 require_once '../vendor/autoload.php';
 
-$requestDispatcher = new \Iuriis\Framework\Http\RequestDispatcher([
-    new \Iuriis\Cms\Router(),
-    new \Iuriis\Blog\Router(),
-    new \Iuriis\ContactUs\Router()
-]);
-$requestDispatcher->dispatch();
+$containerBuilder = new \DI\ContainerBuilder();
 
-exit;
+try {
+    $containerBuilder->addDefinitions('../config/di.php');
+    $container = $containerBuilder->build();
+    /** @var \Iuriis\Framework\Http\RequestDispatcher $requestDispatcher */
+    $requestDispatcher = $container->get(\Iuriis\Framework\Http\RequestDispatcher::class);
+    $requestDispatcher->dispatch();
+} catch (\Exception $e) {
+    echo "{$e->getMessage()} in file {$e->getFile()} at line {$e->getLine()}";
+    exit(1);
+}
