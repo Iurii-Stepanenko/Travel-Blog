@@ -1,42 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 
-require_once '../src/data.php';
-$requestUri = trim($_SERVER['REQUEST_URI'], '/');
+declare(strict_types=1);
 
-switch ($requestUri) {
-    case '':
-        $page = 'home.php';
-        break;
-    case 'contact':
-        $page = 'contact.php';
-        break;
-    case 'about':
-        $page = 'about.php';
-        break;
-    case 'blog':
-        $page = 'blog.php';
-        break;
-    default:
-        if ($data = catalogGetCategoryByUrl($requestUri)) {
-            $page = 'category.php';
-            break;
-        }
+require_once '../vendor/autoload.php';
 
-        if ($data = catalogGetPostByUrl($requestUri)) {
-            $page = 'post.php';
-            break;
-        }
+$requestDispatcher = new \Iuriis\Framework\Http\RequestDispatcher([
+    new \Iuriis\Cms\Router(),
+    new \Iuriis\Blog\Router(),
+    new \Iuriis\ContactUs\Router()
+]);
+$requestDispatcher->dispatch();
 
-        break;
-}
-
-if (!isset($page)) {
-    header("HTTP/1.0 404 Not Found");
-    exit(0);
-}
-
-header('Content-Type: text/html; charset=utf-8');
-
-ob_start();
-require_once "../src/page.php";
-echo ob_get_clean();
+exit;
