@@ -37,6 +37,11 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
             return \Iuriis\Blog\Controller\Post::class;
         }
 
+        if ($data = catalogGetPost()) {
+            $this->request->setParameter('posts-list', $data);
+            return \Iuriis\Blog\Controller\PostsList::class;
+        }
+
         return '';
     }
 }

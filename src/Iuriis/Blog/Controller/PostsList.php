@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Iuriis\Cms\Controller;
+namespace Iuriis\Blog\Controller;
 
-class Page implements \Iuriis\Framework\Http\ControllerInterface
+class PostsList implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
      * @var \Iuriis\Framework\Http\Request $request
@@ -25,10 +25,12 @@ class Page implements \Iuriis\Framework\Http\ControllerInterface
      */
     public function execute(): string
     {
-        $page = $this->request->getParameter('page') . '.php';
+        $data = $this->request->getParameter('posts-list');
+        $page = 'posts-list.php';
 
         ob_start();
         require_once "../src/page.php";
+
         return ob_get_clean();
     }
 }

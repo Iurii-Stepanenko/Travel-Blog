@@ -32,7 +32,7 @@ require_once '../src/data.php';
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/blog">Blog</a></li>
+            <li><a href="/posts-list">Blog</a></li>
             <ul><span>Categories</span>
                 <?php foreach (catalogGetCategory() as $category) : ?>
                     <li>
@@ -51,9 +51,6 @@ require_once '../src/data.php';
 <footer>
     <nav>
         <ul>
-            <li>
-                <a href="/about-us">About Us</a>
-            </li>
             <li>
                 <a href="/contact-us">Contact Us</a>
             </li>
