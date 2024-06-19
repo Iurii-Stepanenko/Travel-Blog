@@ -8,20 +8,20 @@ function catalogGetCategory(): array
     return [
         1 => [
             'category_id' => 1,
-            'name' => 'Beaches',
-            'url' => 'beaches',
+            'name' => 'Ukraine',
+            'url' => 'ukraine',
             'posts' => [1, 2, 3]
         ],
         2 => [
             'category_id' => 2,
-            'name' => 'Volcanoes',
-            'url' => 'volcanoes',
+            'name' => 'Denmark',
+            'url' => 'denmark',
             'posts' => [4, 5, 6]
         ],
         3 => [
             'category_id' => 3,
-            'name' => 'Waterfalls',
-            'url' => 'waterfalls',
+            'name' => 'Poland',
+            'url' => 'poland',
             'posts' => [7, 8, 9]
         ]
     ];
@@ -135,22 +135,6 @@ function catalogGetCategoryPost(int $categoryId): array
     }
 
     return $postsForCategory;
-}
-
-/**
- * @param string $url
- * @return array|null
- */
-function catalogGetCategoryByUrl(string $url): ?array
-{
-    $data = array_filter(
-        catalogGetCategory(),
-        static function ($category) use ($url) {
-            return $category['url'] === $url;
-        }
-    );
-
-    return array_pop($data);
 }
 
 /**

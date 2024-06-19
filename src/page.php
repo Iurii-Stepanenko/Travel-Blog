@@ -34,9 +34,9 @@ require_once '../src/data.php';
             <li><a href="/">Home</a></li>
             <li><a href="/posts-list">Blog</a></li>
             <ul><span>Categories</span>
-                <?php foreach (catalogGetCategory() as $category) : ?>
+                <?php foreach (catalogGetCategory() as $categoryData) : ?>
                     <li>
-                        <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
+                        <a href="/<?= $categoryData['url'] ?>"><?= $categoryData['name'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>

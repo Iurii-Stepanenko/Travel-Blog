@@ -12,12 +12,20 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     private \Iuriis\Framework\Http\Request $request;
 
     /**
+     * @var \Iuriis\Blog\Model\Category\Repository $categoryRepository
+     */
+    private \Iuriis\Blog\Model\Category\Repository $categoryRepository;
+
+    /**
      * @param \Iuriis\Framework\Http\Request $request
+     * @param \Iuriis\Blog\Model\Category\Repository $categoryRepository
      */
     public function __construct(
-        \Iuriis\Framework\Http\Request $request
+        \Iuriis\Framework\Http\Request $request,
+        \Iuriis\Blog\Model\Category\Repository $categoryRepository
     ) {
         $this->request = $request;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -27,8 +35,8 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     {
         require_once '../src/data.php';
 
-        if ($data = catalogGetCategoryByUrl($requestUrl)) {
-            $this->request->setParameter('category', $data);
+        if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('category', $category);
             return \Iuriis\Blog\Controller\Category::class;
         }
 

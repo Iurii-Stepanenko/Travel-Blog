@@ -16,19 +16,19 @@ class RequestDispatcher
     private \Iuriis\Framework\Http\Request $request;
 
     /**
-     * @var \DI\Container $container
+     * @var \DI\FactoryInterface $factory
      */
-    private \DI\Container $container;
+    private \DI\FactoryInterface $factory;
 
     /**
      * @param array $routers
-     * @param \Iuriis\Framework\Http\Request $request
-     * @param \DI\Container $container
+     * @param Request $request
+     * @param \DI\FactoryInterface $factory
      */
     public function __construct(
         array $routers,
         \Iuriis\Framework\Http\Request $request,
-        \DI\Container $container
+        \DI\FactoryInterface $factory
     )
     {
         foreach ($routers as $router) {
@@ -41,7 +41,7 @@ class RequestDispatcher
 
         $this->routers = $routers;
         $this->request = $request;
-        $this->container = $container;
+        $this->factory = $factory;
     }
 
     /**
@@ -53,7 +53,7 @@ class RequestDispatcher
 
         foreach ($this->routers as $router) {
             if ($controllerClass = $router->match($requestUrl)) {
-                $controller = $this->container->get($controllerClass);
+                $controller = $this->factory->get($controllerClass);
 
                 if (!($controller instanceof ControllerInterface)) {
                     throw new \InvalidArgumentException(

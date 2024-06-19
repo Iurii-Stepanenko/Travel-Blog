@@ -1,6 +1,9 @@
+<?php
+/** @var $category \Iuriis\Blog\Model\Category\Entity */
+?>
 <section title="Posts">
-    <h1><?= $data['name'] ?></h1>
-    <?php foreach (catalogGetCategoryPost($data['category_id']) as $post) : ?>
+    <h1><?= $category->getName()?></h1>
+    <?php foreach (catalogGetCategoryPost($category->getCategoryId()) as $post) : ?>
         <div class="post">
             <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>"><?= $post['name'] ?></a>
             <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>">
