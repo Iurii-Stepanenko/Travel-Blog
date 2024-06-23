@@ -115,7 +115,7 @@ class Repository
     }
 
     /**
-     * @return array|null
+     * @return Entity[] | null
      */
     public function blogGetNewPosts(): ?array
     {

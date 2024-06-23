@@ -16,8 +16,7 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
      */
     public function __construct(
         \Iuriis\Framework\Http\Request $request
-    )
-    {
+    ) {
         $this->request = $request;
     }
 
@@ -28,7 +27,7 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     {
 //        Add any more CMS pages in array
         $cmsPage = [
-            ' ',
+            ''
         ];
 
         if (in_array($requestUrl, $cmsPage)) {

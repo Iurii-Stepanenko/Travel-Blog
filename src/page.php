@@ -12,11 +12,9 @@
         footer {
             border: 1px dashed black;
         }
-
         .post-list {
             display: flex;
         }
-
         .post-list .post {
             max-width: 30%;
         }
@@ -37,7 +35,7 @@
 </header>
 
 <main>
-    <?= $this->render($this->getContent()) ?>
+    <?= $this->render($this->getContent(), $this->getContentBlockTemplate()) ?>
 </main>
 
 <footer>

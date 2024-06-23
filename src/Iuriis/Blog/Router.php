@@ -41,8 +41,6 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
-//        require_once '../src/data.php';
-
         if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
             $this->request->setParameter('category', $category);
             return \Iuriis\Blog\Controller\Category::class;
@@ -53,15 +51,9 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
             return \Iuriis\Blog\Controller\Post::class;
         }
 
-        if ($allPosts = $this->postRepository->getList()) {
-            $this->request->setParameter('blog', $allPosts);
+        if ($requestUrl === 'blog') {
             return \Iuriis\Blog\Controller\Blog::class;
         }
-
-//        if ($newestPosts = $this->postRepository->blogGetNewPosts()) {
-//            $this->request->setParameter('posts-list', $newestPosts);
-//            return \Iuriis\Blog\Controller\PostsList::class;
-//        }
 
         return '';
     }

@@ -7,7 +7,7 @@ namespace Iuriis\Framework\Http;
 interface ControllerInterface
 {
     /**
-     * @return string
+     * @return \Iuriis\Framework\Http\Response\Raw
      */
-    public function execute(): string;
+    public function execute(): \Iuriis\Framework\Http\Response\Raw;
 }

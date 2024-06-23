@@ -12,6 +12,11 @@ class Renderer
     private string $contentBlockClass;
 
     /**
+     * @var string $contentBlockTemplate
+     */
+    private string $contentBlockTemplate;
+
+    /**
      * @var \DI\FactoryInterface $factory
      */
     private \DI\FactoryInterface $factory;
@@ -35,13 +40,23 @@ class Renderer
 
     /**
      * @param string $contentBlockClass
-     * @return void
+     * @param string $template
+     * @return $this
      */
-    public function setContent(string $contentBlockClass): Renderer
+    public function setContent(string $contentBlockClass, string $template = ''): Renderer
     {
         $this->contentBlockClass = $contentBlockClass;
+        $this->contentBlockTemplate = $template;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentBlockTemplate(): string
+    {
+        return $this->contentBlockTemplate;
     }
 
     /**
@@ -53,7 +68,7 @@ class Renderer
      */
     public function render(string $blockClass, string $template = ''): string
     {
-        /** @var Block */
+        /** @var Block $block */
         $block = $this->factory->make($blockClass);
 
         if ($template) {
@@ -62,7 +77,7 @@ class Renderer
 
         ob_start();
         require_once $block->getTemplate();
-        return (string)ob_get_clean();
+        return (string) ob_get_clean();
     }
 
     /**

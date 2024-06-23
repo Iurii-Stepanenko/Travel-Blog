@@ -3,27 +3,28 @@
 declare(strict_types=1);
 
 namespace Iuriis\Blog\Controller;
+
 class Post implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
-     * @var \Iuriis\Framework\View\Renderer $renderer
+     * @var \Iuriis\Framework\View\PageResponse $pageResponse
      */
-    private \Iuriis\Framework\View\Renderer $renderer;
+    private \Iuriis\Framework\View\PageResponse $pageResponse;
 
     /**
-     * @param \Iuriis\Framework\View\Renderer $renderer
+     * @param \Iuriis\Framework\View\PageResponse $pageResponse
      */
     public function __construct(
-        \Iuriis\Framework\View\Renderer $renderer
+        \Iuriis\Framework\View\PageResponse $pageResponse
     ) {
-        $this->renderer = $renderer;
+        $this->pageResponse = $pageResponse;
     }
 
     /**
-     * @return string
+     * @return \Iuriis\Framework\Http\Response\Raw
      */
-    public function execute(): string
+    public function execute(): \Iuriis\Framework\Http\Response\Raw
     {
-        return (string)$this->renderer->setContent(\Iuriis\Blog\Block\Post::class);
+        return $this->pageResponse->setBody(\Iuriis\Blog\Block\Post::class);
     }
 }
