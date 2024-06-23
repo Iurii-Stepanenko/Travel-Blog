@@ -1,7 +1,5 @@
 <?php
-
-require_once '../src/data.php';
-
+/** @var $this \Iuriis\Framework\View\Renderer */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,20 +30,14 @@ require_once '../src/data.php';
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/posts-list">Blog</a></li>
-            <ul><span>Categories</span>
-                <?php foreach (catalogGetCategory() as $categoryData) : ?>
-                    <li>
-                        <a href="/<?= $categoryData['url'] ?>"><?= $categoryData['name'] ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <li><a href="/blog">Blog</a></li>
+            <?= $this->render(\Iuriis\Blog\Block\CategoryList::class) ?>
         </ul>
     </nav>
 </header>
 
 <main>
-    <?php require_once "../src/pages/$page" ?>
+    <?= $this->render($this->getContent()) ?>
 </main>
 
 <footer>

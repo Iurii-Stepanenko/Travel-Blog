@@ -17,15 +17,23 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     private \Iuriis\Blog\Model\Category\Repository $categoryRepository;
 
     /**
+     * @var \Iuriis\Blog\Model\Post\Repository $postRepository
+     */
+    private \Iuriis\Blog\Model\Post\Repository $postRepository;
+
+    /**
      * @param \Iuriis\Framework\Http\Request $request
-     * @param \Iuriis\Blog\Model\Category\Repository $categoryRepository
+     * @param Model\Category\Repository $categoryRepository
+     * @param \Iuriis\Blog\Model\Post\Repository $postRepository
      */
     public function __construct(
         \Iuriis\Framework\Http\Request $request,
-        \Iuriis\Blog\Model\Category\Repository $categoryRepository
+        \Iuriis\Blog\Model\Category\Repository $categoryRepository,
+        \Iuriis\Blog\Model\Post\Repository $postRepository
     ) {
         $this->request = $request;
         $this->categoryRepository = $categoryRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -33,22 +41,27 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
-        require_once '../src/data.php';
+//        require_once '../src/data.php';
 
         if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
             $this->request->setParameter('category', $category);
             return \Iuriis\Blog\Controller\Category::class;
         }
 
-        if ($data = catalogGetPostByUrl($requestUrl)) {
-            $this->request->setParameter('post', $data);
+        if ($post = $this->postRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('post', $post);
             return \Iuriis\Blog\Controller\Post::class;
         }
 
-        if ($data = catalogGetPost()) {
-            $this->request->setParameter('posts-list', $data);
-            return \Iuriis\Blog\Controller\PostsList::class;
+        if ($allPosts = $this->postRepository->getList()) {
+            $this->request->setParameter('blog', $allPosts);
+            return \Iuriis\Blog\Controller\Blog::class;
         }
+
+//        if ($newestPosts = $this->postRepository->blogGetNewPosts()) {
+//            $this->request->setParameter('posts-list', $newestPosts);
+//            return \Iuriis\Blog\Controller\PostsList::class;
+//        }
 
         return '';
     }

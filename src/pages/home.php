@@ -1,16 +1,19 @@
+<?php
+/** @var $post \Iuriis\Blog\Model\Post\Entity */
+?>
 <section title="Recently added posts">
     <h2>Recently Added Posts</h2>
     <div class="post-list">
         <?php foreach (blogGetNewPosts() as $post) : ?>
             <div class="post">
-                <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>"><?= $post['name'] ?></a>
-                <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>">
-                    <img src="/post-placeholder.png" alt="<?= $post['name'] ?>" width="200"/>
+                <a href="/<?= $post->getUrl() ?>" title="<?= $post->getName() ?>"><?= $post->getName() ?></a>
+                <a href="/<?= $post->getUrl() ?>" title="<?= $post->getName() ?>">
+                    <img src="/post-placeholder.png" alt="<?= $post->getName() ?>" width="200"/>
                 </a>
-                <p><?= substr($post['description'], 0, 150) . '...' ?></p>
-                <p><?= $post['author_name'] ?></p>
-                <p><?= $post['publication_date'] ?></p>
-                <a href="/<?= $post['url'] ?>">Read more</a>
+                <p><?= substr($post->getDescription(), 0, 150) . '...' ?></p>
+                <p><?= $post->getAuthorName() ?></p>
+                <p><?= $post->getPublicationDate() ?></p>
+                <a href="/<?= $post->getUrl() ?>">Read more</a>
             </div>
         <?php endforeach; ?>
     </div>

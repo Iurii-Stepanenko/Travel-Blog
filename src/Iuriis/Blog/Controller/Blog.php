@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Iuriis\Blog\Controller;
 
-class Category implements \Iuriis\Framework\Http\ControllerInterface
+class Blog implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
      * @var \Iuriis\Framework\View\Renderer $renderer
@@ -25,6 +25,6 @@ class Category implements \Iuriis\Framework\Http\ControllerInterface
      */
     public function execute(): string
     {
-        return (string)$this->renderer->setContent(\Iuriis\Blog\Block\Category::class);
+        return (string)$this->renderer->setContent(\Iuriis\Blog\Block\Blog::class);
     }
 }

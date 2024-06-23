@@ -6,17 +6,17 @@ namespace Iuriis\Blog\Controller;
 class Post implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
-     * @var \Iuriis\Framework\Http\Request $request
+     * @var \Iuriis\Framework\View\Renderer $renderer
      */
-    private \Iuriis\Framework\Http\Request $request;
+    private \Iuriis\Framework\View\Renderer $renderer;
 
     /**
-     * @param \Iuriis\Framework\Http\Request $request
+     * @param \Iuriis\Framework\View\Renderer $renderer
      */
     public function __construct(
-        \Iuriis\Framework\Http\Request $request
+        \Iuriis\Framework\View\Renderer $renderer
     ) {
-        $this->request = $request;
+        $this->renderer = $renderer;
     }
 
     /**
@@ -24,12 +24,6 @@ class Post implements \Iuriis\Framework\Http\ControllerInterface
      */
     public function execute(): string
     {
-        $data = $this->request->getParameter('post');
-        $page = 'post.php';
-
-        ob_start();
-        require_once "../src/page.php";
-
-        return ob_get_clean();
+        return (string)$this->renderer->setContent(\Iuriis\Blog\Block\Post::class);
     }
 }
