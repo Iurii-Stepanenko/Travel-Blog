@@ -7,14 +7,27 @@ namespace Iuriis\ContactUs\Controller;
 class Form implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
-     * @return string
+     * @var \Iuriis\Framework\View\PageResponse $pageResponse
      */
-    public function execute(): string
-    {
-        $page = 'contact-us.php';
+    private \Iuriis\Framework\View\PageResponse $pageResponse;
 
-        ob_start();
-        require_once "../src/page.php";
-        return ob_get_clean();
+    /**
+     * @param \Iuriis\Framework\View\PageResponse $pageResponse
+     */
+    public function __construct(
+        \Iuriis\Framework\View\PageResponse $pageResponse
+    ) {
+        $this->pageResponse = $pageResponse;
+    }
+
+    /**
+     * @return \Iuriis\Framework\Http\Response\Raw
+     */
+    public function execute(): \Iuriis\Framework\Http\Response\Raw
+    {
+        return $this->pageResponse->setBody(
+            \Iuriis\Framework\View\Block::class,
+            '../src/Iuriis/ContactUs/view/contact-us.php'
+        );
     }
 }

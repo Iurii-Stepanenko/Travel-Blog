@@ -7,30 +7,24 @@ namespace Iuriis\Blog\Controller;
 class Category implements \Iuriis\Framework\Http\ControllerInterface
 {
     /**
-     * @var \Iuriis\Framework\Http\Request $request
+     * @var \Iuriis\Framework\View\PageResponse $pageResponse
      */
-    private \Iuriis\Framework\Http\Request $request;
+    private \Iuriis\Framework\View\PageResponse $pageResponse;
 
     /**
-     * @param \Iuriis\Framework\Http\Request $request
+     * @param \Iuriis\Framework\View\PageResponse $pageResponse
      */
     public function __construct(
-        \Iuriis\Framework\Http\Request $request
+        \Iuriis\Framework\View\PageResponse $pageResponse
     ) {
-        $this->request = $request;
+        $this->pageResponse = $pageResponse;
     }
 
     /**
-     * @return string
+     * @return \Iuriis\Framework\Http\Response\Raw
      */
-    public function execute(): string
+    public function execute(): \Iuriis\Framework\Http\Response\Raw
     {
-        $data = $this->request->getParameter('category');
-        $page = 'category.php';
-
-        ob_start();
-        require_once "../src/page.php";
-
-        return ob_get_clean();
+        return $this->pageResponse->setBody(\Iuriis\Blog\Block\Category::class);
     }
 }

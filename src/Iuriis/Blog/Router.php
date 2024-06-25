@@ -12,12 +12,36 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     private \Iuriis\Framework\Http\Request $request;
 
     /**
+     * @var \Iuriis\Blog\Model\Category\Repository $categoryRepository
+     */
+    private \Iuriis\Blog\Model\Category\Repository $categoryRepository;
+
+    /**
+     * @var \Iuriis\Blog\Model\Post\Repository $postRepository
+     */
+    private \Iuriis\Blog\Model\Post\Repository $postRepository;
+
+    /**
+     * @var \Iuriis\Blog\Model\Author\Repository $authorRepository
+     */
+    private Model\Author\Repository $authorRepository;
+
+    /**
      * @param \Iuriis\Framework\Http\Request $request
+     * @param \Iuriis\Blog\Model\Category\Repository $categoryRepository
+     * @param \Iuriis\Blog\Model\Post\Repository $postRepository
+     * @param \Iuriis\Blog\Model\Author\Repository $authorRepository
      */
     public function __construct(
-        \Iuriis\Framework\Http\Request $request
+        \Iuriis\Framework\Http\Request $request,
+        \Iuriis\Blog\Model\Category\Repository $categoryRepository,
+        \Iuriis\Blog\Model\Post\Repository $postRepository,
+        \Iuriis\Blog\Model\Author\Repository $authorRepository
     ) {
         $this->request = $request;
+        $this->categoryRepository = $categoryRepository;
+        $this->postRepository = $postRepository;
+        $this->authorRepository = $authorRepository;
     }
 
     /**
@@ -25,21 +49,23 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
-        require_once '../src/data.php';
-
-        if ($data = catalogGetCategoryByUrl($requestUrl)) {
-            $this->request->setParameter('category', $data);
+        if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('category', $category);
             return \Iuriis\Blog\Controller\Category::class;
         }
 
-        if ($data = catalogGetPostByUrl($requestUrl)) {
-            $this->request->setParameter('post', $data);
+        if ($post = $this->postRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('post', $post);
             return \Iuriis\Blog\Controller\Post::class;
         }
 
-        if ($data = catalogGetPost()) {
-            $this->request->setParameter('posts-list', $data);
-            return \Iuriis\Blog\Controller\PostsList::class;
+        if ($author = $this->authorRepository->getAuthorByUrl($requestUrl)) {
+            $this->request->setParameter('author', $author);
+            return \Iuriis\Blog\Controller\Author::class;
+        }
+
+        if ($requestUrl === 'blog') {
+            return \Iuriis\Blog\Controller\Blog::class;
         }
 
         return '';
