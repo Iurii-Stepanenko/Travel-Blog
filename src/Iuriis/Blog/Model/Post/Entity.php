@@ -6,11 +6,39 @@ namespace Iuriis\Blog\Model\Post;
 
 class Entity
 {
+    /**
+     * @var int
+     */
     private int $postId;
+
+    /**
+     * @var string
+     */
     private string $name;
+
+    /**
+     * @var string
+     */
     private string $url;
+
+    /**
+     * @var string
+     */
     private string $description;
+
+    /**
+     * @var string
+     */
     private string $authorName;
+
+    /**
+     * @var int
+     */
+    private int $authorId;
+
+    /**
+     * @var string
+     */
     private string $publicationDate;
 
     /**
@@ -104,6 +132,25 @@ class Entity
     public function setAuthorName(string $authorName): Entity
     {
         $this->authorName = $authorName;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorId(): int
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * @param int $authorId
+     * @return $this
+     */
+    public function setAuthorId(int $authorId): Entity
+    {
+        $this->authorId = $authorId;
 
         return $this;
     }

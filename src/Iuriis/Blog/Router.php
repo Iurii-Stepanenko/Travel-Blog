@@ -22,18 +22,26 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
     private \Iuriis\Blog\Model\Post\Repository $postRepository;
 
     /**
+     * @var \Iuriis\Blog\Model\Author\Repository $authorRepository
+     */
+    private Model\Author\Repository $authorRepository;
+
+    /**
      * @param \Iuriis\Framework\Http\Request $request
-     * @param Model\Category\Repository $categoryRepository
+     * @param \Iuriis\Blog\Model\Category\Repository $categoryRepository
      * @param \Iuriis\Blog\Model\Post\Repository $postRepository
+     * @param \Iuriis\Blog\Model\Author\Repository $authorRepository
      */
     public function __construct(
         \Iuriis\Framework\Http\Request $request,
         \Iuriis\Blog\Model\Category\Repository $categoryRepository,
-        \Iuriis\Blog\Model\Post\Repository $postRepository
+        \Iuriis\Blog\Model\Post\Repository $postRepository,
+        \Iuriis\Blog\Model\Author\Repository $authorRepository
     ) {
         $this->request = $request;
         $this->categoryRepository = $categoryRepository;
         $this->postRepository = $postRepository;
+        $this->authorRepository = $authorRepository;
     }
 
     /**
@@ -49,6 +57,11 @@ class Router implements \Iuriis\Framework\Http\RouterInterface
         if ($post = $this->postRepository->getByUrl($requestUrl)) {
             $this->request->setParameter('post', $post);
             return \Iuriis\Blog\Controller\Post::class;
+        }
+
+        if ($author = $this->authorRepository->getAuthorByUrl($requestUrl)) {
+            $this->request->setParameter('author', $author);
+            return \Iuriis\Blog\Controller\Author::class;
         }
 
         if ($requestUrl === 'blog') {

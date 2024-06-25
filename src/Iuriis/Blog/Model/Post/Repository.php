@@ -26,6 +26,7 @@ class Repository
                 ->setUrl('post-1')
                 ->setDescription('Post1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jane Dou')
+                ->setAuthorId(1)
                 ->setPublicationDate('2022-06-15'),
             2 => $this->makeEntity()
                 ->setPostId(2)
@@ -33,6 +34,7 @@ class Repository
                 ->setUrl('post-2')
                 ->setDescription('Post2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jane Dou')
+                ->setAuthorId(1)
                 ->setPublicationDate('2022-08-11'),
             3 => $this->makeEntity()
                 ->setPostId(3)
@@ -40,6 +42,7 @@ class Repository
                 ->setUrl('post-3')
                 ->setDescription('Post3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jack Nobody')
+                ->setAuthorId(2)
                 ->setPublicationDate('2022-08-28'),
             4 => $this->makeEntity()
                 ->setPostId(4)
@@ -47,6 +50,7 @@ class Repository
                 ->setUrl('post-4')
                 ->setDescription('Post4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Silvia Smith')
+                ->setAuthorId(3)
                 ->setPublicationDate('2022-11-07'),
             5 => $this->makeEntity()
                 ->setPostId(5)
@@ -54,6 +58,7 @@ class Repository
                 ->setUrl('post-5')
                 ->setDescription('Post5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Silvia Smith')
+                ->setAuthorId(3)
                 ->setPublicationDate('2022-12-30'),
             6 => $this->makeEntity()
                 ->setPostId(6)
@@ -61,6 +66,7 @@ class Repository
                 ->setUrl('post-6')
                 ->setDescription('Post6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jack Nobody')
+                ->setAuthorId(2)
                 ->setPublicationDate('2023-01-16'),
             7 => $this->makeEntity()
                 ->setPostId(7)
@@ -68,6 +74,7 @@ class Repository
                 ->setUrl('post-7')
                 ->setDescription('Post7 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jane Dou')
+                ->setAuthorId(1)
                 ->setPublicationDate('2023-02-15'),
             8 => $this->makeEntity()
                 ->setPostId(8)
@@ -75,6 +82,7 @@ class Repository
                 ->setUrl('post-8')
                 ->setDescription('Post8 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Jack Nobody')
+                ->setAuthorId(2)
                 ->setPublicationDate('2023-02-28'),
             9 => $this->makeEntity()
                 ->setPostId(9)
@@ -82,6 +90,7 @@ class Repository
                 ->setUrl('post-9')
                 ->setDescription('Post9 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.')
                 ->setAuthorName('Iurii Stepanenko')
+                ->setAuthorId(4)
                 ->setPublicationDate('2023-03-10')
         ];
     }
@@ -115,7 +124,7 @@ class Repository
     }
 
     /**
-     * @return Entity[] | null
+     * @return array|null
      */
     public function blogGetNewPosts(): ?array
     {
@@ -127,6 +136,24 @@ class Repository
 
         // Return the first three elements of the sorted array
         return array_slice($posts, 0, 3);
+    }
+
+    /**
+     * @param int $authorId
+     * @return array|null
+     */
+    public function getByAuthorId(int $authorId): ?array
+    {
+        $posts = $this->getList();
+        $authorPosts = [];
+
+        foreach ($posts as $post) {
+            if ($post->getAuthorId() === $authorId) {
+                $authorPosts[] = $post;
+            }
+        }
+
+        return $authorPosts;
     }
 
     /**

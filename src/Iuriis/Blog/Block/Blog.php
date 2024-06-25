@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Iuriis\Blog\Block;
 
-use Iuriis\Blog\Model\Post\Entity as PostEntity;
-
 class Blog extends \Iuriis\Framework\View\Block
 {
     protected string $template = '../src/Iuriis/Blog/view/pages/blog.php';
@@ -22,8 +20,25 @@ class Blog extends \Iuriis\Framework\View\Block
     /**
      * @return \Iuriis\Blog\Model\Post\Entity[]
      */
-    public function getPostsList()
+    public function getPostsList(): array
     {
         return $this->postRepository->getList();
+    }
+
+    /**
+     * @param int $postId
+     * @return string|null
+     */
+    public function prepareAuthorUrl(int $postId): ?string
+    {
+        $postsList = $this->getPostsList();
+
+        foreach ($postsList as $post) {
+            if ($post->getPostId() === $postId) {
+                return str_replace(' ', '-', strtolower($post->getAuthorName()));
+            }
+        }
+
+        return null;
     }
 }

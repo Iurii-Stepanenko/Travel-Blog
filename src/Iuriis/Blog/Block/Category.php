@@ -48,4 +48,21 @@ class Category extends \Iuriis\Framework\View\Block
     {
          return $this->postRepository->getByIds($this->getCategory()->getPosts());
     }
+
+    /**
+     * @param int $postId
+     * @return string|null
+     */
+    public function prepareAuthorUrl(int $postId): ?string
+    {
+        $categoryPosts = $this->getCategoryPosts();
+
+        foreach ($categoryPosts as $post) {
+            if ($post->getPostId() === $postId) {
+                return str_replace(' ', '-', strtolower($post->getAuthorName()));
+            }
+        }
+
+        return null;
+    }
 }

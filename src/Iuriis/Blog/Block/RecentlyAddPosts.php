@@ -22,8 +22,25 @@ class RecentlyAddPosts extends \Iuriis\Framework\View\Block
     /**
      * @return \Iuriis\Blog\Model\Post\Entity[]
      */
-    public function getRecentlyAddedPosts()
+    public function getRecentlyAddedPosts(): array
     {
         return $this->postRepository->blogGetNewPosts();
+    }
+
+    /**
+     * @param int $postId
+     * @return string|null
+     */
+    public function prepareAuthorUrl(int $postId): ?string
+    {
+        $recentlyAddedPosts = $this->getRecentlyAddedPosts();
+
+        foreach ($recentlyAddedPosts as $post) {
+            if ($post->getPostId() === $postId) {
+                return str_replace(' ', '-', strtolower($post->getAuthorName()));
+            }
+        }
+
+        return null;
     }
 }
