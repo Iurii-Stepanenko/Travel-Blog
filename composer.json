@@ -8,6 +8,8 @@
     "squizlabs/php_codesniffer": "^3.6"
   },
   "require": {
-    "php-di/php-di": "^7.0"
+    "php-di/php-di": "^7.0",
+    "ext-pdo": "*",
+    "symfony/console": "^6.4"
   }
 }

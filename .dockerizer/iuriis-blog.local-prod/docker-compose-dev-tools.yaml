@@ -16,3 +16,25 @@ services:
       - traefik.http.routers.mh-prod-iuriis-blog-local-http.rule=Host(`mh-prod-iuriis-blog.local`)
       - traefik.http.routers.mh-prod-iuriis-blog-local-http.entrypoints=http
       - traefik.http.services.mh-prod-iuriis-blog-local-http.loadbalancer.server.port=8025
+  mysql:
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MARIADB_ROOT_USER=root
+      - MARIADB_ROOT_PASSWORD=root
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pma-prod-iuriis-blog-local-http.rule=Host(`pma-prod-iuriis-blog.local`)
+      - traefik.http.routers.pma-prod-iuriis-blog-local-http.entrypoints=http
+    depends_on:
+      - mysql
+    environment:
+      - PMA_HOSTS=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+      - 'PMA_ABSOLUTE_URI=http://pma-prod-iuriis-blog.local/'
+    volumes:
+      - /sessions
