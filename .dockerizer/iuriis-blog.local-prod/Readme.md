@@ -3,13 +3,14 @@
 Add the following domains to the `/etc/hosts` file:
 
 ```shell
-127.0.0.1 iuriis-blog.local www.iuriis-blog.local mh-prod-iuriis-blog.local
+127.0.0.1 iuriis-blog.local www.iuriis-blog.local mh-prod-iuriis-blog.local pma-prod-iuriis-blog.local
 ```
 
 Urls list:
 - [https://iuriis-blog.local](https://iuriis-blog.local) 
 - [https://www.iuriis-blog.local](https://www.iuriis-blog.local) 
 - [http://mh-prod-iuriis-blog.local](http://mh-prod-iuriis-blog.local)
+- [http://pma-prod-iuriis-blog.local](http://pma-prod-iuriis-blog.local)
 
 
 ## Local development - self-signed certificates ##
